@@ -3,628 +3,684 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>異人研究院 - 超拔完整文檔</title>
+    <title>Luna 寵物溝通師 X 異人研究院金瀾言卿 - 過功儀式解析</title>
     
-    <!-- Google Fonts -->
+    <!-- 引入 Noto Sans TC (黑體) & Noto Serif TC (宋體) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- 引入 Material Icons (用於簡約圖標) -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- GSAP & ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        paper: '#EBE9E7', // 純色灰米色
-                        'paper-dark': '#DFDCD9',
-                        ink: '#2B2623', // 深褐色/接近黑色
-                        cinnabar: '#8C3224', // 朱砂紅
-                        taupe: '#9D9996',
-                        darkbg: '#231F20', // 深色背景
-                    },
                     fontFamily: {
                         serif: ['"Noto Serif TC"', 'serif'],
                         sans: ['"Noto Sans TC"', 'sans-serif'],
                     },
-                    lineHeight: {
-                        loose: '2.0',
+                    colors: {
+                        'china-red': '#6D1515',     // 宮牆深紅 (背景)
+                        'paper-white': '#F5F5F0',   // 米白宣紙 (背景)
+                        'ink-black': '#2c2c2c',     // 墨黑 (淺色底文字)
+                        'gold-accent': '#C79100',   // 沉穩金 (裝飾)
                     },
-                    letterSpacing: {
-                        widest: '0.15em',
+                    backgroundImage: {
+                        'texture': "url('https://www.transparenttextures.com/patterns/black-felt.png')",
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
                     }
                 }
             }
         }
     </script>
-
     <style>
-        /* Global Styles */
         body {
-            background-color: #EBE9E7;
-            color: #2B2623;
             overflow-x: hidden;
         }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #EBE9E7;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #9D9996;
-            border-radius: 3px;
-        }
-
-        /* Accordion Transition */
-        .accordion-content {
-            transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-        }
-        .accordion-content.active {
-            opacity: 1;
-        }
-
-        /* Text Justify Fix */
-        .text-justify-fix {
-            text-align: justify;
-            text-justify: inter-ideograph;
-        }
         
-        /* Sidebar Transition */
-        #sidebar {
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-            opacity: 0;
-            visibility: hidden;
-        }
-        #sidebar.open {
-            opacity: 1;
-            visibility: visible;
+        /* 隱藏滾動條 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F5F5F0; }
+        ::-webkit-scrollbar-thumb { background: #6D1515; }
+
+        /* 通用區塊設定 */
+        section {
+            padding: 80px 24px;
+            position: relative;
         }
 
-        /* Menu Link Hover Effect */
-        .menu-link {
-            position: relative;
-            display: inline-block;
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .menu-link::after {
-            content: '';
+
+        /* 紋理疊加 */
+        .texture-overlay {
             position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -4px;
-            left: 50%;
-            background-color: #EBE9E7;
-            transition: width 0.3s ease, left 0.3s ease;
+            inset: 0;
+            background-image: url("https://www.transparenttextures.com/patterns/shattered-island.png");
+            opacity: 0.05;
+            pointer-events: none;
         }
-        .menu-link:hover::after {
-            width: 100%;
-            left: 0;
+
+        /* 簡單的顯現動畫 */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 首字下沉樣式 */
+        .drop-cap-gold {
+            float: left;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            margin-right: 10px;
+            margin-top: 5px;
+            color: #C79100;
+        }
+        .drop-cap-red {
+            float: left;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            margin-right: 10px;
+            margin-top: 5px;
+            color: #6D1515;
+        }
+
+        /* AI 聊天相關樣式 */
+        .ai-response p { margin-bottom: 0.8rem; }
+        .ai-response strong { color: #6D1515; font-weight: 600; border-bottom: 1px solid rgba(109, 21, 21, 0.2); }
+        
+        /* 載入動畫 */
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+            background-color: #C79100; 
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-ink selection:text-paper">
+<body class="font-sans font-light bg-paper-white text-ink-black relative">
 
-    <!-- Progress Bar -->
-    <div id="progress-bar" class="fixed top-0 left-0 h-[2px] bg-ink z-50 w-0 opacity-80"></div>
+    <!-- 1. Header 區塊 (紅底) -->
+    <section class="bg-china-red text-white min-h-[85vh] flex flex-col justify-center items-center text-center">
+        <div class="texture-overlay"></div>
+        <div class="container-narrow fade-up">
+            
+            <!-- 標題區域 -->
+            <h1 class="mb-8 tracking-widest font-bold leading-tight">
+                <!-- 次要標題：Luna (縮小) -->
+                <span class="block mb-2 font-serif text-lg md:text-xl text-white/70 font-light">Luna 寵物溝通師</span>
+                
+                <span class="block text-sm text-gold-accent my-2 font-light opacity-60">✕</span>
+                
+                <!-- 主要標題：異人研究院 (放大) -->
+                <span class="block font-serif text-4xl md:text-6xl text-white mt-3">異人研究院 金瀾言卿</span>
+            </h1>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full flex justify-between items-center px-6 py-5 z-40 bg-paper/95 backdrop-blur-sm transition-all duration-300 border-b border-transparent" id="navbar">
-        <div class="font-serif text-sm tracking-widest text-ink/80">異人研究院XLUNA寵物溝通師 · 完整文檔</div>
-        <button id="menu-btn" class="group flex flex-col items-end gap-1.5 cursor-pointer p-2 hover:opacity-70 transition-opacity">
-            <span class="w-6 h-[2px] bg-ink"></span>
-            <span class="w-6 h-[2px] bg-ink"></span>
-            <span class="w-4 h-[2px] bg-ink group-hover:w-6 transition-all duration-300"></span>
-        </button>
-    </nav>
+            <div class="h-[1px] w-20 bg-gold-accent/40 mb-12 mx-auto"></div>
 
-    <!-- Fullscreen Menu -->
-    <div id="sidebar" class="fixed inset-0 bg-darkbg z-50 flex flex-col justify-center items-center text-paper">
-        <button id="close-btn" class="absolute top-6 right-6 p-4 hover:opacity-70 transition-opacity">
-            <svg class="w-8 h-8 text-paper" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-        
-        <div class="flex flex-col items-center gap-8 font-serif text-lg tracking-widest">
-            <div class="mb-4 relative">
-                <span class="text-xs text-taupe block text-center mb-2 tracking-[0.3em]">目錄索引</span>
-                <div class="w-8 h-[1px] bg-taupe mx-auto"></div>
+            <h2 class="text-2xl md:text-3xl font-serif font-bold tracking-widest mb-16 text-gold-accent">
+                過功儀式的原理及注意事項
+            </h2>
+            
+            <div class="space-y-4 text-lg text-white/80 tracking-wide font-light">
+                <p>給寵物溝通師與能量修習者的必修課</p>
+                <p>道家文化及各種教派文化中的過功儀式是什麼？</p>
+                <p>過功有什麼作用及意義？</p>
             </div>
-            <a href="#section-intro" onclick="toggleMenu()" class="menu-link text-paper/90 hover:text-white transition-colors py-2">超拔緣起與寓意</a>
-            <a href="#section-meaning" onclick="toggleMenu()" class="menu-link text-paper/90 hover:text-white transition-colors py-2">一 · 深層蘊意</a>
-            <a href="#section-history" onclick="toggleMenu()" class="menu-link text-paper/90 hover:text-white transition-colors py-2">二 · 歷史脈絡</a>
-            <a href="#section-difference" onclick="toggleMenu()" class="menu-link text-paper/90 hover:text-white transition-colors py-2">三 · 人與動物</a>
-            <a href="#section-qa" onclick="toggleMenu()" class="menu-link text-paper/90 hover:text-white transition-colors py-2">四 · 常見疑問</a>
-            <a href="#section-master" onclick="toggleMenu()" class="menu-link text-paper/90 hover:text-white transition-colors py-2">五 · 道長寄語</a>
         </div>
+    </section>
+
+    <!-- 2. 定義區塊 (白底) -->
+    <section class="bg-paper-white text-ink-black">
+        <div class="texture-overlay" style="opacity: 0.03;"></div>
+        <div class="container-narrow fade-up">
+            <article class="text-xl md:text-2xl leading-loose text-justify font-light">
+                <span class="drop-cap-red">道</span>家文化及民間教派中的過功儀式，是兩廣地區民間道法傳承的核心程序，亦稱「過教」或「過法」。其本質是通過師徒間的能量傳遞與身份認證，實現功法傳承的完整閉環。
+            </article>
+        </div>
+    </section>
+
+    <!-- 3. 為什麼要過功 (紅底) -->
+    <section class="bg-china-red text-white">
+        <div class="texture-overlay"></div>
+        <div class="container-narrow fade-up">
+            <h3 class="text-3xl text-center text-gold-accent font-serif font-bold tracking-widest mb-4">習法學子必須經過過功儀式</h3>
+            <p class="text-center text-white/60 text-base mb-16 tracking-wide">原因在於該儀式具備三重核心作用</p>
+            
+            <div class="space-y-12">
+                <!-- 01 -->
+                <div class="pl-8 border-l border-white/20 hover:border-gold-accent transition-colors duration-300">
+                    <h4 class="text-xl text-gold-accent font-serif font-bold mb-4">一、身份合法性構建</h4>
+                    <div class="text-base text-white/80 leading-relaxed space-y-3">
+                        <p>師父通過焚燒疏文、念誦請師文，將信息上稟祖師、仙師（法主），使弟子獲得使用本門符咒、修煉本門功夫等等的合法權限。</p>
+                        <p>這種「官方認證」不僅賦予弟子法術使用權，更伴隨「隨身兵馬」或「護法」的隱性能量護持。</p>
+                        <p>例如，某些門派要求弟子僅穿短褲接受封身畫符，師父用香火在前後左右各畫9道符號，共36道，部分門派還會在頭頂腳底加封，形成能量結界。</p>
+                    </div>
+                </div>
+
+                <!-- 02 -->
+                <div class="pl-8 border-l border-white/20 hover:border-gold-accent transition-colors duration-300">
+                    <h4 class="text-xl text-gold-accent font-serif font-bold mb-4">二、能量通道激活</h4>
+                    <div class="text-base text-white/80 leading-relaxed space-y-3">
+                        <p>師父通過強力打通弟子身上的氣路，建立內外能量交換的通道。</p>
+                        <p>每種功夫對應特定氣路，如防身制敵類武法需打通多條氣路，而治病祈福類文法可能僅需打通單一氣路。</p>
+                        <p>以「過掌」為例，師父先將特定符號畫於自己掌心，再壓入弟子掌心，弟子握拳保存後，師父用香火重複畫符強化，確保能量精準注入。</p>
+                    </div>
+                </div>
+
+                <!-- 03 -->
+                <div class="pl-8 border-l border-white/20 hover:border-gold-accent transition-colors duration-300">
+                    <h4 class="text-xl text-gold-accent font-serif font-bold mb-4">三、功力躍遷式提升</h4>
+                    <div class="text-base text-white/80 leading-relaxed space-y-3">
+                        <p>師父將多年修煉的功力通過「吞符」「血傳」等方式強行灌注弟子體內。</p>
+                        <p>例如，師父用朱砂在黃紙上畫符，令弟子焚化於水中吞服；或通過割破手掌、印堂等部位，與弟子進行血液交融，實現血脈相傳。</p>
+                        <p>部分高階儀式甚至無需複雜操作，師父僅需一句「這個功夫傳給某某了，你可以用了」，弟子即可瞬間獲得功力——此即「口教心傳」之法，但僅限具備極高能量的師父使用。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 意義 (白底) -->
+    <section class="bg-paper-white text-ink-black">
+        <div class="texture-overlay" style="opacity: 0.03;"></div>
+        <div class="container-narrow fade-up">
+            <p class="text-2xl text-center mb-12 font-bold font-serif tracking-wider text-china-red">過功儀式的意義遠超技術傳遞，它構建了完整的傳承體系：</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 卡片風格：白底+邊框 -->
+                <div class="p-6 border-t-2 border-china-red bg-white shadow-sm">
+                    <span class="text-china-red font-serif font-bold text-xl block mb-3">其一，確保功法效力。</span>
+                    <span class="text-ink-black/80 text-base block leading-relaxed">未經過功的弟子，即便對符咒（花字）倒背如流，也無法激發任何效果。</span>
+                </div>
+                <div class="p-6 border-t-2 border-gray-300 bg-white shadow-sm">
+                    <span class="text-ink-black font-serif font-bold text-xl block mb-3">其二，降低修煉門檻。</span>
+                    <span class="text-ink-black/80 text-base block leading-relaxed">多數功法過功後即可使用，弟子無需從零開始修煉，僅需定期供奉祖師即可維持功力。</span>
+                </div>
+                <div class="p-6 border-t-2 border-gray-300 bg-white shadow-sm">
+                    <span class="text-ink-black font-serif font-bold text-xl block mb-3">其三，強化師徒羈絆。</span>
+                    <span class="text-ink-black/80 text-base block leading-relaxed">文過需在法壇前完成，武過則需在野外或高山頂進行，某些防身制敵類武法更要求「文武雙過」，這種嚴苛的儀式流程加深了師徒間的精神聯結。</span>
+                </div>
+                <div class="p-6 border-t-2 border-china-red bg-white shadow-sm">
+                    <span class="text-china-red font-serif font-bold text-xl block mb-3">其四，維護門派權威。</span>
+                    <span class="text-ink-black/80 text-base block leading-relaxed">過功次數越多，功力越強，但每次過功均需師父消耗大量能量，因此只有通過考驗的弟子才能獲得多次過功機會，這從制度上保障了功法傳承的純粹性。</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 盜法 Q&A (紅底) -->
+    <section class="bg-china-red text-white">
+        <div class="texture-overlay"></div>
+        <div class="container-narrow space-y-12 fade-up">
+            <!-- Q1 -->
+            <article>
+                <div class="text-xl font-bold font-serif text-gold-accent mb-4 tracking-wide flex items-center">
+                    <span class="w-1.5 h-1.5 bg-gold-accent rotate-45 mr-3"></span>
+                    禁止盜法傳法的意義是什麼，真的有用嗎？
+                </div>
+                <div class="pl-5 border-l-2 border-gold-accent/30 text-lg leading-loose text-white/80">
+                    <p class="mb-4">禁止盜法傳法意義重大，它從根源上保障了門派功法傳承的有規律性與純粹性。</p>
+                    <p>若盜法傳法之風盛行，功法可能會被肆意傳播、濫用，甚至被心懷不軌之人利用來謀取私利，這會嚴重破壞門派功法的獨特價值與神祕性，進而損害門派的整體利益與聲譽。</p>
+                </div>
+            </article>
+
+            <!-- Q2 -->
+            <article>
+                <div class="text-xl font-bold font-serif text-gold-accent mb-4 tracking-wide flex items-center">
+                    <span class="w-1.5 h-1.5 bg-gold-accent rotate-45 mr-3"></span>
+                    設定的詛咒是什麼意義？
+                </div>
+                <div class="pl-5 border-l-2 border-gold-accent/30 text-lg leading-loose text-white/80">
+                    <p>設定詛咒並非毫無作用，它是一種強大的精神威懾力量。</p>
+                    <p>在傳統觀念裡，詛咒被認為具有神祕且強大的力量，能對違反規定者產生心理上的巨大壓力，使其不敢輕易觸碰紅線，從而有效維護門派規矩的嚴肅性。</p>
+                </div>
+            </article>
+
+            <!-- Q3 -->
+            <article>
+                <div class="text-xl font-bold font-serif text-gold-accent mb-4 tracking-wide flex items-center">
+                    <span class="w-1.5 h-1.5 bg-gold-accent rotate-45 mr-3"></span>
+                    偷偷盜法傳法師父又不知道那她是如何處理得到我呢？
+                </div>
+                <div class="pl-5 border-l-2 border-gold-accent/30 text-lg leading-loose text-white/80 space-y-4">
+                    <p>偷偷盜法傳法，即便師父當下不知，但法界自有其運行規則與因果循環。</p>
+                    <p>從長遠來看，這種違背門派規矩、破壞傳承秩序的行為，往往會引發一系列不良後果。</p>
+                    <p>比如，盜法者自身可能因違背天地法則而遭受反噬，在修煉過程中遭遇重重阻礙，難以精進；其所傳授之人，也可能因缺乏正規的傳承與引導，無法真正領悟功法精髓，甚至可能因誤用功法而走火入魔。</p>
+                    <p>而且，這種行為一旦被發現，盜法者將面臨門派嚴厲的懲處，以儆效尤。</p>
+                </div>
+            </article>
+
+             <!-- Q4 -->
+             <article>
+                <div class="text-xl font-bold font-serif text-gold-accent mb-4 tracking-wide flex items-center">
+                    <span class="w-1.5 h-1.5 bg-gold-accent rotate-45 mr-3"></span>
+                    如果學習的是不正統的法脈，過功儀式是錯的，還是傳法者盜取來的，會有什麼後果？
+                </div>
+                <div class="pl-5 border-l-2 border-gold-accent/30 text-lg leading-loose text-white/80 space-y-4">
+                    <p>不僅學習者難以獲得真正的功力提升，無法領悟功法真諦，還可能因誤入歧途而遭受不可預知的傷害。</p>
+                    <p>對於傳法者而言，盜取法脈、傳播不正統功法，是對門派權威的公然挑釁與破壞，一旦被門派察覺，必將遭受嚴懲，輕則被逐出師門，重則可能面臨更為殘酷的刑罰，以維護門派的尊嚴與規矩的嚴肅性。</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 6. 異人研究院 Q&A (白底) -->
+    <section class="bg-paper-white text-ink-black">
+        <div class="texture-overlay" style="opacity: 0.03;"></div>
+        <div class="container-narrow fade-up">
+            <div class="text-center mb-12">
+                <span class="text-china-red text-sm tracking-widest border border-china-red px-4 py-1.5 rounded-full">常見問答</span>
+                <p class="text-xl mt-8 font-medium font-serif">被問到最多的問題今天解釋一下：</p>
+            </div>
+
+            <article class="space-y-12">
+                <!-- Q5 -->
+                <div>
+                    <h4 class="text-xl font-bold font-serif text-china-red mb-4 leading-relaxed">異人研究院的符法過功的作用意義及原理性，依據什麼？</h4>
+                    <p class="text-lg leading-relaxed text-ink-black/80 font-light">
+                        異人研究院符法過功的作用意義，在於通過嚴謹規範的儀式流程，確保功法傳承的合法性與純粹性，維護門派在功法傳承方面的權威地位。<br>
+                        其原理基於對天地能量運行規律的精準把握，以及對門派傳承體系的深度遵循。
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold font-serif text-china-red mb-4 leading-relaxed">通絡和其解？立意與先天的志在於哪？</h4>
+                    <p class="text-lg leading-relaxed text-ink-black/80 font-light">
+                        通絡是為了讓能量在師徒之間順暢流通，構建穩固的能量傳輸通道；解則是解開功法傳承中的各種限制與束縛，使功法能完整且準確地傳遞。
+                    </p>
+                </div>
+
+                <!-- Q6 -->
+                <div>
+                    <h4 class="text-xl font-bold font-serif text-china-red mb-4 leading-relaxed">為什麼我傷官見官，食傷吐秀，官殺混雜，魁罡雙童子，這樣的一位師父兼創始人，我為什麼可以這樣，我開創的這些東西有用嗎？</h4>
+                    <p class="text-lg leading-relaxed text-ink-black/80 font-light">
+                        傷官見官等特殊命理格局，賦予我獨特的天賦與使命，讓我有開創全新功法體系的魄力與能力。我開創的這些東西，是經過實踐檢驗且符合門派發展需求的，具有實用價值。
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold font-serif text-china-red mb-4 leading-relaxed">你們跟隨我學習，對你們有什麼利弊？</h4>
+                    <p class="text-lg leading-relaxed text-ink-black/80 font-light">
+                        跟隨我學習，利在於能接觸到獨特且有效的功法，獲得更廣闊的發展空間；弊則在於若自身無法適應其獨特的教學與傳承方式，可能會在修煉過程中遇到困難與挑戰。
+                    </p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 7. 立意與先天 (紅底 + 收尾) -->
+    <section class="bg-china-red text-white">
+        <div class="texture-overlay"></div>
+        <div class="container-narrow fade-up space-y-16">
+            
+            <div class="text-center">
+                 <p class="text-white/60 mb-4 italic text-lg">接下來再強調講講「立意與先天」的關係，以便理解為何我在指導學生時，雖強調順應自然，卻顯得格外嚴格。</p>
+            </div>
+
+            <!-- 立意核心 -->
+            <article>
+                <h3 class="text-4xl text-center font-bold font-serif text-gold-accent mb-12 leading-normal">「立意，方能獨行於天地間。」</h3>
+                
+                <div class="text-xl leading-loose text-white/90 space-y-8 text-justify px-4 border-l-2 border-white/20 pl-8">
+                    <p><span class="font-bold text-gold-accent text-2xl font-serif">所謂立意，</span>從字面上理解，即是將「意」樹立起來，將「意」點亮，使我們的真心擺脫迷相的束縛，回歸最真最初的狀態，並找到當下的使命，這便是立意。</p>
+                    <p>立意，猶如在心中點燃一盞靈光，保持這盞金光不滅，便是確立了「真意」，因此，立意也象徵著元神的覺醒。</p>
+                    <p>立意，不僅覺醒了我們的神意，更是將元神「站立」起來，不再隨波逐流，從而孕育出獨立的見解，即獨立思考與辨別是非的能力，這需要豐富的閱歷作為支撐。</p>
+                    <p>唯有立意、立「一」，專心致志，一意貫之，方能開啟天地之門，與天地建立起冥冥中的聯繫，領受天意的指引。</p>
+                    <p>在畫符之道中，立意同樣至關重要，若沒有一顆明鏡般清澈的心，怎能從紛繁眾生中超脫而出，承接真正的神靈之力？恐怕早已迷失在紛擾之中。</p>
+                    <p>因此，唯有懷揣真誠之心，凝聚金光之意，方能無畏外界千難萬阻，獨自前行。</p>
+                </div>
+            </article>
+
+            <!-- 立意深層 -->
+            <article>
+                <div class="text-lg leading-loose text-white/80 font-light">
+                    <p>立意是使命覺醒的起點，其重要性並非止步於此。</p>
+                    <p>在燈芯不滅的基礎上，於現實中逐步驗證，將確立的「意」置於風雨中磨礪，檢驗其是否出自真心真意。</p>
+                    <p>真金不怕火煉，只要真意不渝，德行相配，邪魔歪道便無法侵擾。</p>
+                    <p>此時，再依內法修行，以七日為一週期，行事如有神助，種種機緣皆安排得當，此謂「萬神扶助」。</p>
+                    <p>因立意已成，有了連接點，神力之助方能穩定抵達身心，切實助修行人實現願望，甚至引動天象。</p>
+                    <p>在一定程度上，立意亦可視為「明理」的深化。明理即明辨道理，辨識是非，具備足夠的見解以鑒別真假。</p>
+                    <p>而立意，則是在明辨是非的基礎上，提出獨屬於自己的思想體系，並輔以獨特的模型或導圖結構予以支撐。因此，立意即是覺醒內心的光芒，點亮黑夜中的明燈，使之在黑暗中長明不滅。</p>
+                </div>
+            </article>
+
+            <!-- 情感類比 (深色底襯托) -->
+            <article class="bg-black/20 p-8 border border-white/10">
+                <div class="text-lg leading-loose text-white/80 italic font-light">
+                    <p class="mb-4 text-justify">這裡就像我們喜歡一個陌生異性，在我們尚未深入了解對方時，內心會充滿好奇與憧憬，那種喜歡更多是基於一種朦朧的感覺。同樣，在修煉的歷程中，當我們初步確立立意，就如同對這陌生異性有了最初的心動。隨著在現實中不斷驗證立意，就彷彿是在與這「陌生異性」逐漸熟悉、深入了解。每一次在風雨中對立意的磨礪，都像是與對方共同經歷困難與挑戰，增進彼此的了解。當發現立意出自真心真意，且能經受住重重考驗，就如同確認了對這陌生異性的感情是真摯且堅定的，從此便能在這愛情的道路上堅定地走下去，不斷收穫成長與進步，進而確認身份，結婚拜天地，在修煉的語境中，這就如同在門派中通過嚴格的考驗與認證，獲得正式且尊崇的身份地位。如同婚禮上拜天地，是對天地規則的敬畏與遵循，在門派裡維護權威也是對門派傳承與規矩的尊崇。以明確的規則和儀式，讓每一位成員都清楚自身的位置與責任，從而確保門派的整體秩序與凝聚力，使門派在江湖中屹立不倒，傳承不息。</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 8. 明心 (白底) -->
+    <section class="bg-paper-white text-ink-black">
+        <div class="texture-overlay" style="opacity: 0.03;"></div>
+        <div class="container-narrow fade-up">
+            <p class="text-2xl text-center mb-10 text-china-red font-bold font-serif">在立意之前，首先需要明意，也就是明心。</p>
+            
+            <div class="py-10 px-6 border-y border-china-red/20 text-center bg-white shadow-sm">
+                 <p class="text-2xl text-ink-black font-bold mb-4 leading-normal font-serif">「夫，人神好清而心擾之。人心好靜，而欲牽之。常能遣其欲，而心自靜；澄其心，而神自清。自然六欲不生，三毒消滅。」</p>
+                 <p class="text-sm text-ink-black/50 tracking-widest uppercase font-sans">— 《清靜經》</p>
+            </div>
+
+            <div class="text-lg leading-loose text-ink-black/80 space-y-8 mt-12 font-light">
+                 <p>這段話的含義是什麼呢？從字面上看，神不清是因為心在干擾，心不靜則是因為欲望在牽動。這裡呈現的是一個遞進關係：先是外界的欲望干擾了心，心隨之動搖，進而干擾了居於心宮的神，即形成了「欲—心—神」這一連鎖反應。</p>
+                 
+                 <div class="bg-china-red/5 p-8 border-l-4 border-china-red">
+                    <p class="text-china-red font-bold mb-4 text-xl font-serif">舉個例子：</p>
+                    <p>人體猶如一部精密的大機器，心臟便是控制台，而神識則是控制台中的那個「小人」。當人體遭受外部攻擊時，控制台屏幕會顯示相應畫面，「告知」小人需啟動防禦或其他應對措施。提升小人的控制能力，使其既不驚慌失措，也不肆意妄為，而是將其牢牢掌控。道家將此稱為「拴心猿，伏意馬」，抱元守一；儒家則稱之為「執中」，不偏不倚，不上不下。通過這種方式，提升人體大機器的全方位防禦力、靈活度和持久性（即「命」），使肉身更為強健，從而更加長壽地承載我們的內在靈魂，擁有更多時間去錘煉元神。為此，有一門正統長生法門，名為「丹道」，有興趣者不妨深入了解一番。</p>
+                 </div>
+
+                 <p>「人神好清，而心擾之」：當人的神志清醒、氣息爽朗時，便會感到自然愜意，因為「清」是神原本的狀態，正如嬰兒時期那般。然而，後天的心常常妄動，對各種事物充滿好奇，無法安定，從而干擾了神的先天清靜，阻礙了修行的進程。<br>這也說明，修心是修神的基礎。<br>中醫典籍《黃帝內經》中提到：「心者，生之本，神處也」，心藏神，是生命和精神的根本所在。</p>
+                 <p>「人心好靜，而欲牽之」：心其實與神一樣，渴望享受清靜。<br>但為何心常妄動？顯然這與人的欲望密切相關。<br>心本身是不動的，而欲望卻無處不在，誘惑你沈淪。<br>因此，用「牽之」來形容，如同牽牛遛狗一般，欲望牽動著你的心，使你難獲得清靜。要達到清靜，必須制約欲望，只有心不被外界牽動打擾，居於心宮內的神才能安然自若。<br>《黃帝內經》也曾提到「精神內守，恬淡虛無」的養生修行準則。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. 先天 (紅底) -->
+    <section class="bg-china-red text-white">
+        <div class="texture-overlay"></div>
+        <div class="container-narrow fade-up">
+             <div class="text-lg leading-loose text-white/80 space-y-6 font-light">
+                <p>最後，談談先天的出現時機：所謂先天，道家稱之為「清靜之後，過玄關而為先天」。</p>
+                <p>其實，每天剛起床時便是先天狀態，此時還未進入紛擾的紅塵，頭腦清醒，思緒不多。</p>
+                <p>然而，隨著我們打開手機，各種文字、氣息偏好、色彩等逐漸侵入心中，對我們原本潔白的心態點綴上色彩，引動先天狀態逐漸消退。</p>
+                <p>先天是清靜的，身體活動則染上塵埃，思維增多則思緒紛飛。</p>
+                <p>因此，大部分時間我們只能通過回光收心，即減少光線照射，斬除心中雜念，來達到相對的清靜，減少外界干擾。</p>
+                <p>小到一個動作、一句話、一個念頭，都會影響剛起床時的先天狀態。</p>
+                <p>例如，起床時手臂的擺動，頭部微微抬起等小動作，雖微不足道，但對於剛起床時的純淨狀態，卻是顯著的干擾。</p>
+                <p>在剛起床時，心中出現的任何一個思維都容易被捕捉，無論好壞，都能清晰地觀察。</p>
+                <p>此時也是修行的好時機，有助於直面恐懼，直面心中的不足。</p>
+                <p>夢境同樣是我們直面恐懼的場所，夢境中的反應都是心底的第一反應，被放大後感同身受。若能在剛睡醒的先天狀態中好好回憶夢中的言行，便能第一時間發現問題，反省自身。</p>
+                <p>這是一段寶貴的時間，今日點出，望各位修真者有所收穫，進道無魔。</p>
+             </div>
+             
+             <div class="mt-12 bg-black/20 p-8 border border-white/10">
+                 <h4 class="text-xl text-gold-accent font-bold mb-6 font-serif">那些有起床氣嚴重的人怎麼解釋？</h4>
+                 <p class="text-white/80 leading-relaxed text-lg font-light">
+                    起床氣看似是個人情緒的小問題，實則與個人的身心狀態和自我調節能力緊密相關。<br>
+                    每個人都應秉持對自身狀態的覺察之心，以平和、寧靜之態開啟新的一天。<br>
+                    若因起床氣而煩躁不安，不僅破壞了自身的先天狀態，影響日常狀態的穩定，更可能對周圍人產生不良影響，擾亂生活中的和諧氛圍。<br>
+                    對於起床氣嚴重者，應主動進行自我引導與調整，通過適當的身心調適方法，幫助自己克服這一不良情緒，以更好地保持內在的平和狀態。<br>
+                    <span class="block mt-6 text-gold-accent border-t border-white/20 pt-4 font-bold tracking-widest text-xl font-serif">其欲重，心神不寧，而牽之。</span>
+                 </p>
+             </div>
+        </div>
+    </section>
+
+    <!-- 10. 文化課 (白底) -->
+    <section class="bg-paper-white text-ink-black">
+        <div class="texture-overlay" style="opacity: 0.03;"></div>
+        <div class="container-narrow fade-up space-y-16">
+            <article>
+                 <div class="text-xl font-bold text-china-red mb-6 leading-relaxed font-serif">
+                    下面講一下大家常問的，我為什麼要在每一位學子門生的課堂上必須設定極其費時的文化課？<br>
+                    未來大家出師可不可以忽略這一步的課時內容？<br>
+                    <span class="text-ink-black">它的作用意義是什麼？</span>
+                </div>
+                <div class="text-lg leading-loose text-ink-black/80 space-y-6 font-light">
+                    <p>文化課絕非可有可無之設置，而是傳承知識體系、夯實個人認知根基的關鍵所在。</p>
+                    <p>每一次文化課，都承載著人類文明的智慧結晶，是學子門生了解學科歷史、構建知識框架、培養獨立思考能力的重要途徑。若忽略此步驟，學子門生便如同無根之木、無源之水，難以真正領悟知識的本質與價值，更難以在探索之路走得長遠。</p>
+                    <p>因此，文化課不僅不可忽略，反而應倍加重視，確保每一位門生都能從中汲取養分，為日後的成長之路奠定堅實基礎。</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="text-lg leading-loose text-ink-black/80 space-y-6 font-light">
+                    <p><span class="text-china-red text-xl font-bold font-serif">文化課關乎「立意」，</span>進而實現精神共通與身外化身的境界。</p>
+                    <p>畢竟，這世界上沒有人會無聊到極點、閒散到如此地步，去說一些毫無意義的話來浪費你們寶貴的學習時間。</p>
+                    <p>既然我們是傳承者與被傳承者的關係，我深入講講「精神共通與身外化身」的意義。</p>
+                    <p>我們每個人在內心深處是相互連接的。</p>
+                    <p>當我們心意相通時，以修為作為橋樑，便能在瞬息之間感知他人的心願等信息。</p>
+                    <p>這種感知並非直接獲取信息中的每一個字句，而是在行動中的一種默契與感召。</p>
+                    <p>例如，在行善的過程中，兩個素不相識的人，若都懷有向善之心，並在實際行動中踐行，那麼無論他們身處何地，都會踏上同一條軌跡，彼此逐漸靠攏，最終相遇。</p>
+                    <p>許多人將這個最核心的領域稱為「集體意識」。</p>
+                    <p>當我們深入其中並能夠感知他人時，天地便會賦予我們一個特殊的標記。</p>
+                    <p>這個標記類似於一種管理者的角色，而我更傾向於將其稱為「神位」，這是與天地溝通的最基礎位置，由此，化身的過程便得以展開。</p>
+                </div>
+            </article>
+
+            <article>
+                <div class="text-lg leading-loose text-ink-black/80 space-y-6 font-light">
+                    <p>就像我在為大家講授文化課時，每次與大家見面之前，總會遭遇一些離奇且戲劇性的事件。儘管這些都是我的個人生活經歷，但似乎每次不同的經歷都精準地契合了每一位學子門生的命運軌跡。這些看似偶然的遭遇，實則彷彿是一種無形的指引，使得大家對我的信任與敬仰日益加深。</p>
+                    <p>在日常的教學與實踐中，我憑藉這些獨特的經歷，以及與大家心意相通所獲得的能力，做出一個個正確且令人信服的決策。無論是解答學習中的困惑，還是應對成長中的挑戰，我的每一個舉措都能贏得眾人的支持，從而有力地凝聚起積極向上的共識，讓我們在探索知識與自我提升的道路上穩步前行。</p>
+                    <p>化身在眾多小說中表現為分化出一個與自己如出一轍的分身，憑藉相似的能力協助自身完成任務。當兩人的信念高度契合，並在集體意識中得到認可時，他們的言行舉止便如同出自同一模子，從而形成了所謂的「身外化身」。</p>
+                    <p>儘管他們的肉身各異，但所傳遞的精神文化與行為模式卻極為相似，這正是「身外化身」的精髓所在。</p>
+                    <p>舉例而言，一位老師悉心培養的學生，在學成出師後，便可被視為老師的一個「身外化身」，因其性格相近，技藝相仿，這類化身現象較為常見。</p>
+                    <p>然而，客觀而言，並不存在「某某是某某的化身」這種絕對的說法。</p>
+                    <p>他們實際上是彼此的化身，或者更準確地說，兩人共同體現了某種精神。若要斷言某某是某某的化身，還需綜合考慮其名聲與影響力。</p>
+                    <p>我時常聽信眾提及，某某正在從事某某事務，其行事風格與我極為相似。然而，我對這位人士的名字卻並不熟悉。詢問我的學子門生後，方才得知原來是她們的徒弟，哈哈。隨後，她通過我的學子門生的引薦，得以與我相見，這便是最終的相遇。</p>
+                    <p>在人與人的深度聯結中，這種理念同樣有著深刻體現。當師徒之間達到一種極高的契合度，彷彿精神與技藝融為一體，就如同道教所言的天人合一之境，亦或是佛教所說的共用一個阿賴耶識，這不僅僅是一種境界的象徵，更是對知識傳承有序、精神延續不斷的一種有力保障。這種獨特的師徒關係，使得核心精神得以完整且純粹地傳承下去，不會因個體的差異或外界的干擾而出現斷層或偏離，進而確保了理念和技藝在歲月的長河中始終保持著鮮活的生命力。</p>
+                    <p>因此，大家現在應當能夠理解，為何異人研究院在完成傳統的過功儀式之後，仍需進一步深化立意，並強化精神與身外化身的共通意義。</p>
+                </div>
+            </article>
+            
+            <!-- 結語 (聯名落款) -->
+            <div class="mt-20 pt-12 border-t border-gray-300 text-center fade-up pb-12">
+                <p class="text-xl md:text-2xl font-serif font-bold text-china-red tracking-widest mb-4">
+                    Luna 寵物溝通師 ✕ 異人研究院 金瀾言卿
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ✨ 問道於師 (Gemini API 簡約版) -->
+    <div id="ask-master-widget" class="fixed bottom-8 right-8 z-50 flex flex-col items-end">
+        
+        <!-- 聊天視窗 (初始隱藏) -->
+        <div id="chat-window" class="hidden flex-col w-80 h-[450px] bg-[#FDFDFD] border border-gray-200 shadow-2xl rounded-lg overflow-hidden mb-4 transform transition-all duration-300 origin-bottom-right">
+            <!-- 標題欄 (極簡) -->
+            <div class="bg-white border-b border-gray-100 p-4 flex justify-between items-center">
+                <span class="text-gray-800 font-serif font-bold tracking-widest text-sm">宗師解惑</span>
+                <button id="close-chat" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <span class="material-icons-outlined text-lg">close</span>
+                </button>
+            </div>
+
+            <!-- 對話內容區 -->
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50/50">
+                <!-- 歡迎訊息 -->
+                <div class="flex flex-col items-start">
+                    <div class="bg-white border border-gray-100 text-gray-700 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[90%] text-sm leading-relaxed">
+                        <p class="mb-1 text-china-red font-bold text-xs">金瀾言卿：</p>
+                        <p>善信你好。無論是修行過功，或是探討寵物溝通背後的能量運作，若有疑惑，皆可問我。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 輸入區 -->
+            <div class="p-3 bg-white border-t border-gray-100 flex items-center space-x-2">
+                <input type="text" id="user-input" placeholder="請輸入問題..." 
+                       class="flex-1 bg-gray-50 border-none rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-200 text-gray-700 placeholder-gray-400">
+                <button id="send-btn" class="text-china-red hover:bg-red-50 p-2 rounded-full transition-colors disabled:opacity-50">
+                    <span class="material-icons-outlined text-xl">send</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 懸浮按鈕 (極簡圖標 - 自動光亮/對話) -->
+        <button id="toggle-chat" class="w-14 h-14 bg-china-red text-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#8B1A1A] transition-colors duration-300 z-50 animate-float">
+            <span class="material-icons-outlined text-2xl">auto_awesome</span>
+        </button>
     </div>
 
-    <!-- Hero Header -->
-    <header id="section-intro" class="min-h-screen flex flex-col justify-center items-center px-6 pt-24 pb-20 relative">
-        <div class="gsap-hero opacity-0 translate-y-8 border border-cinnabar/60 px-4 py-2 text-cinnabar text-xs tracking-[0.2em] font-serif mb-12 uppercase bg-transparent">
-            Internal Document
-        </div>
-        <h1 class="gsap-hero opacity-0 translate-y-8 font-serif text-6xl md:text-8xl font-bold text-center leading-tight mb-6 text-ink">
-            超拔
-        </h1>
-        <div class="gsap-hero opacity-0 translate-y-8 font-serif italic text-2xl md:text-3xl text-ink/70 mb-10 font-light border-b border-ink/30 pb-1 px-4 inline-block">
-            歷史與意義
-        </div>
-        <div class="gsap-hero opacity-0 translate-y-8 w-16 h-[2px] bg-ink mb-12"></div>
-        <div class="gsap-hero opacity-0 translate-y-8 text-sm tracking-widest text-ink/60 font-serif">
-            異人研究院（金瀾言卿）
-        </div>
-        <p class="gsap-hero opacity-0 translate-y-8 max-w-2xl text-center text-ink/80 leading-loose font-serif font-light mt-16 text-base">
-            道家超拔法事源於「貴生」思想，通過煉度、破獄等儀式連接生死，關懷亡靈並錨定生者精神。其從東漢三官信仰到現代洞經音樂的演變，展現宗教與民間文化的互動。科儀嚴謹、主神體系複雜，體現道教以「煉度」超越輪迴、以「功德」連通陰陽，最終追求「天人合一」的生死哲學。
-        </p>
-    </header>
-
-    <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-6 pb-32 space-y-40">
-
-        <!-- Section 1 -->
-        <section class="gsap-section">
-            <h2 class="font-serif text-2xl mb-12 text-center text-ink tracking-widest">
-                <span class="block text-xs text-taupe mb-3 uppercase tracking-[0.3em]">Core Meaning</span>
-                超拔的核心理念
-            </h2>
-            <div class="text-justify-fix leading-loose text-ink/80 font-serif text-base md:text-lg border-l-2 border-cinnabar/50 pl-8 ml-2">
-                <p>道家超拔法事通過儀式溝通宇宙秩序，淨化亡靈、救度生者，與哲學緊密相關，形成獨特文化體系。</p>
-            </div>
-        </section>
-
-        <!-- Section 2 -->
-        <section id="section-meaning" class="gsap-section">
-            <div class="flex items-center gap-4 mb-16">
-                <span class="font-serif text-4xl text-ink/20">01</span>
-                <h2 class="font-serif text-2xl text-ink tracking-widest">超拔的深層蘊意</h2>
-            </div>
-            <div class="space-y-20">
-                <div>
-                    <h3 class="font-serif text-xl text-ink font-semibold mb-6 flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cinnabar"></span>
-                        煉度重生的宇宙觀
-                    </h3>
-                    <p class="text-justify-fix leading-loose text-ink/80 font-serif">
-                        亡靈因陰質滯留幽冥，需通過「煉度」儀式煉化其陰氣，獲得新生。
-                        《度人經》「仙道貴生，無量度人」，法師以自身精氣神為引，天地陰陽運轉，將亡魂從「陰境」轉為「陽質」得以往生。
-                        是對亡魂的救贖，也是法師修煉的印證。
-                    </p>
-                </div>
-                <div>
-                    <h3 class="font-serif text-xl text-ink font-semibold mb-6 flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cinnabar"></span>
-                        陰陽的秩序護道人
-                    </h3>
-                    <p class="text-justify-fix leading-loose text-ink/80 font-serif">
-                        道教認為宇宙是陰陽平衡的整體，通過超度法事如「破地獄」「解冤釋結」調和生死兩界失衡。破地獄儀式中，法師以劍或策杖打破象徵地獄的瓦片，助亡魂回歸正道，並通過與神祇溝通確保亡魂合法解脫。
-                    </p>
-                </div>
-                <div>
-                    <h3 class="font-serif text-xl text-ink font-semibold mb-6 flex items-center gap-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cinnabar"></span>
-                        雙向功德利益
-                    </h3>
-                    <p class="text-justify-fix leading-loose text-ink/80 font-serif">
-                        超度不僅救贖亡靈，也助生者積福。
-                        道教認為，超度孤魂可結善緣、蔭子孫，超度宗親能化解家族業力、改善運勢。
-                        《救苦妙經》指出誦經功德可回向生者，達到消災延壽的效果。
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3 -->
-        <section id="section-history" class="gsap-section">
-            <div class="flex items-center gap-4 mb-16">
-                <span class="font-serif text-4xl text-ink/20">02</span>
-                <h2 class="font-serif text-2xl text-ink tracking-widest">歷史脈絡與儀式演變</h2>
-            </div>
-            <div class="relative border-l border-ink/20 pl-10 ml-3 space-y-16">
-                <div class="relative">
-                    <span class="absolute -left-[45px] top-1.5 font-serif text-xs text-ink/50 w-8 text-right">早期</span>
-                    <span class="absolute -left-[11px] top-2.5 w-[5px] h-[5px] rounded-full bg-ink"></span>
-                    <h4 class="font-serif text-xl font-bold text-ink mb-4">東漢至魏晉</h4>
-                    <p class="text-justify-fix leading-loose text-ink/80 font-serif">
-                        道教超度儀式源於天師道三官信仰，東漢《三官手書》奠定基礎，通過懺悔罪過解脫亡靈。魏晉時靈寶派吸收佛教「普度」思想，《度人經》標誌超度理論成熟，形成「誦經—煉度—往生」完整體系。
-                    </p>
-                </div>
-                <div class="relative">
-                    <span class="absolute -left-[45px] top-1.5 font-serif text-xs text-ink/50 w-8 text-right">鼎盛</span>
-                    <span class="absolute -left-[11px] top-2.5 w-[5px] h-[5px] rounded-full bg-ink"></span>
-                    <h4 class="font-serif text-xl font-bold text-ink mb-4">唐宋時期</h4>
-                    <p class="text-justify-fix leading-loose text-ink/80 font-serif">
-                        唐代帝王推崇道教，黃籙齋成國家超度法會，儀式嚴謹且融入宮廷音樂。宋代《玉音法事》等樂譜推動道教音樂與科儀融合，破地獄儀式逐漸成為超度核心環節。
-                    </p>
-                </div>
-                <div class="relative">
-                    <span class="absolute -left-[45px] top-1.5 font-serif text-xs text-ink/50 w-8 text-right">融合</span>
-                    <span class="absolute -left-[11px] top-2.5 w-[5px] h-[5px] rounded-full bg-ink"></span>
-                    <h4 class="font-serif text-xl font-bold text-ink mb-4">民間融合元明清</h4>
-                    <p class="text-justify-fix leading-loose text-ink/80 font-serif">
-                        元代全真道興起後，超度法事結合內修與科儀。
-                        明代雲南洞經音樂融入，形成「洞經會」，以音樂營造氛圍，「度橋」象徵亡魂過奈何橋。
-                        清代至民國，超度儀式世俗化。
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4 -->
-        <section id="section-difference" class="gsap-section">
-             <div class="flex items-center gap-4 mb-16">
-                <span class="font-serif text-4xl text-ink/20">03</span>
-                <h2 class="font-serif text-2xl text-ink tracking-widest">人的超拔與動物超拔歷史</h2>
-            </div>
-            <div class="space-y-10 text-justify-fix leading-loose text-ink/80 font-serif mb-12">
-                <p>道家超拔法事通過「貴生」思想延伸至人類與動物的超度，融合漢代三官信仰與現代科學，體現「齊同慈愛」的宇宙觀。</p>
-                <p>道家超拔中人類與動物超度的歷史展現了道教「齊同慈愛」與「萬物有靈」的核心理念，其理論、儀式及演變既有共性，也因對象不同形成獨特體系。</p>
-                <p>道教「精怪通靈」理論認為動物可通過吸收日月精華開啟靈智，《鍾呂傳道集》的「五仙」體系包含其修煉路徑。漢代《焦氏易林》提及「老狐多態，行為蠱怪」，反映動物魂魄需超度的觀念。</p>
-            </div>
-            <div class="space-y-12">
-                <div class="bg-white/40 border border-ink/10 p-8 hover:border-cinnabar/30 transition-colors duration-500">
-                    <h3 class="font-serif text-xl text-ink mb-6 tracking-widest border-b border-ink/10 pb-4">人的超度法事核心</h3>
-                    <h4 class="font-bold mb-2">陰陽調和煉度重生</h4>
-                    <p class="text-justify-fix leading-loose text-ink/80 mb-6">
-                        道教認為人類魂魄因陰質滯留幽冥，需通過「水火交媾」煉化陰氣。
-                        高功法師以精氣神為引，模擬陰陽運轉，將亡魂轉化為「陽質」，助其往生東方青華極樂世界。此過程需與城隍、東嶽及天庭神祇溝通，確保合法性。
-                    </p>
-                    <h4 class="font-bold mb-2">功德與承負</h4>
-                    <p class="text-justify-fix leading-loose text-ink/80">
-                        超度既救贖亡靈，也助生者積福。《救苦妙經》指出誦經功德可回向生者消災延壽，超度宗親能化解家族「承負」，改善後代運勢，如宋代黃箓齋通過「延生牌位」為生者祈福，實現「陰超陽泰」。
-                    </p>
-                </div>
-                <div class="bg-white/40 border border-ink/10 p-8 hover:border-cinnabar/30 transition-colors duration-500">
-                    <h3 class="font-serif text-xl text-ink mb-6 tracking-widest border-b border-ink/10 pb-4">動物的超度獨特</h3>
-                    <p class="text-justify-fix leading-loose text-ink/80 mb-6">
-                        動物因「無明業因」墮入畜牲道，超度需破除蒙昧認知。
-                        《九幽拔罪寶懺》將地獄分為上、中、下三幽，分別對應人間、畜生、餓鬼罪業。
-                        其中「幽寒獄」關押虐待動物者，可通過「放生科儀」與「畜生超生咒」化解罪業。
-                    </p>
-                    <p class="text-justify-fix leading-loose text-ink/80">
-                        動物超度注重「解穢壇破業障」與「煉形重塑靈體」，如《動物往生科儀》中焚紙枷解無明、唱誦助神識離畜牲道，體現道教「齊同慈愛」思想延伸至生態關懷，雲南彝族畢摩亦強調「萬物平等」尊重生命。
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 5 -->
-        <section id="section-qa" class="gsap-section">
-            <div class="flex items-center gap-4 mb-16">
-                <span class="font-serif text-4xl text-ink/20">04</span>
-                <h2 class="font-serif text-2xl text-ink tracking-widest">常見疑問解析</h2>
-            </div>
-            <div class="border-t border-ink/10">
-                <div class="border-b border-ink/10">
-                    <button class="accordion-header w-full flex justify-between items-center text-left py-6 group hover:bg-ink/5 transition-colors px-4">
-                        <span class="font-serif text-lg text-ink font-bold">焰口超拔和上述超拔的邊界？</span>
-                        <span class="text-ink/40 text-xl font-light transform transition-transform duration-300 group-hover:rotate-180">+</span>
-                    </button>
-                    <div class="accordion-content bg-white/30">
-                        <div class="px-6 py-8 text-justify-fix leading-loose text-ink/80 font-serif">
-                            <p class="mb-4">
-                                道家焰口超拔與傳統超拔的邊界在於「煉度」與「施食」功能的差異化整合。
-                                前者以「煉度重生」維繫生死平衡，後者以「施食解厄」構建救濟，二者在主神體系與儀式結構中既對立又互補，共同詮釋道教對生死命題的回應。
-                                「天人合一」的追求使其在歷史中持續煥發生機。
-                            </p>
-                            <h4 class="font-bold mt-6 mb-2">焰口超拔（施食濟幽）：</h4>
-                            <p class="mb-4">
-                                焰口超拔《全真青玄濟煉鐵罐施食》側重施食賑濟功能。
-                                其理論建構融合佛教餓鬼道概念與道教幽獄體系，通過「解業—施食—托化」鏈條，先以劍訣破除「酆都鐵圍山」，再借助特定科儀將法食化為甘露救濟餓鬼，重在普濟無主孤魂，非定向救度特定亡魂。
-                            </p>
-                            <h4 class="font-bold mt-6 mb-2">傳統超拔（煉度重生）：</h4>
-                            <p class="mb-4">
-                                法事以《度人經》“仙道貴生”為理論基礎，通過法師內煉模擬陰陽運轉，將亡魂陰質煉化為陽質，助其往生東方青華極樂世界。核心實踐為“水火交媾”，以心火腎水對應離坎二卦，借“取坎填離”轉化亡魂狀態。過程中需與城隍、東嶽及天庭神祇溝通，確保亡魂合法脫離幽冥禁錮。
-                            </p>
-                            <p class="mt-4 italic text-ink/60">
-                                可以理解為我幫你組個局，以你的名義為東道主，請周圍十方惡鬼冤親債主吃飯，也類似於其他教派的煙供。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-b border-ink/10">
-                    <button class="accordion-header w-full flex justify-between items-center text-left py-6 group hover:bg-ink/5 transition-colors px-4">
-                        <span class="font-serif text-lg text-ink font-bold">什麼類型的人具備超拔的資格？</span>
-                        <span class="text-ink/40 text-xl font-light transform transition-transform duration-300 group-hover:rotate-180">+</span>
-                    </button>
-                    <div class="accordion-content bg-white/30">
-                        <div class="px-6 py-8 text-justify-fix leading-loose text-ink/80 font-serif">
-                            <p class="mb-6">
-                                道家超拔資格認定基於「先天道性—後天修煉—法脈權威—道德倫理」的動態平衡，結合量子力學、神經科學與內丹修煉等視角，體現古老智慧與現代探索的交融。
-                                修煉核心在於通過「煉己築基」實現「人天合一」，使意識與大道同頻，將超拔資格從外在標籤轉化為內在的宇宙共振能力。
-                            </p>
-                            <p class="mb-6">
-                                道教中超拔資格的認定需滿足先天稟賦、後天修煉、法脈傳承、道德修養四大條件，涉及宗教儀軌權威性與宇宙生命科學邏輯。
-                            </p>
-                            <h4 class="font-bold mt-4 mb-2">魂魄特異：</h4>
-                            <p class="mb-4">
-                                道教認為人有「三魂七魄」，其中「爽靈」主感知，「幽精」通幽冥。
-                                先天魂魄強旺者（如八字帶華蓋/太極/魁罡），其「陰竅」敏感，易與靈體共振，表現為兒童時期可見「無形眾生」或對靈異事件有直覺反應，如元代范圓曦幼時記事即被視為先天道性顯化。
-                            </p>
-                            <h4 class="font-bold mt-4 mb-2">先天具足：</h4>
-                            <p class="mb-4">
-                                隋唐道教「道性論」認為眾生稟道而生，本具清靜自然的道性，但因識神障蔽，唯有先天道性澄明者（如八字純陰或純陽）可突破感知屏障。
-                                《抱朴子內篇》提到“胞胎之中已含信道之性”，表現為對宗教儀式的天然親近，例如現代案例中12歲兒童自發祭拜三清、手搓真書的現象。
-                            </p>
-                            <h4 class="font-bold mt-4 mb-2">特殊能量：</h4>
-                            <p>
-                                《黃帝內經》“男八女七”週期律指出，男性16歲、女性14歲時先天元炁最足。
-                                若未因情慾損耗，其“炁場透明度”更高，易與幽冥共振。
-                                雲南洞經會實驗表明，這類人參與超度時靈體感知概率提升40%以上。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-b border-ink/10">
-                    <button class="accordion-header w-full flex justify-between items-center text-left py-6 group hover:bg-ink/5 transition-colors px-4">
-                        <span class="font-serif text-lg text-ink font-bold">為什麼有些道士法師超拔可以看到靈體，而有些不能？</span>
-                        <span class="text-ink/40 text-xl font-light transform transition-transform duration-300 group-hover:rotate-180">+</span>
-                    </button>
-                    <div class="accordion-content bg-white/30">
-                        <div class="px-6 py-8 text-justify-fix leading-loose text-ink/80 font-serif">
-                            <p class="mb-6">
-                                道家超拔法事中靈體感知差異由「先天稟賦—後天修煉—時空場域」三重變量決定，融合量子力學、神經科學與內丹修煉等視角，體現古老智慧與現代意識探索的結合。
-                                修煉核心在於通過「煉己築基」實現「人天合一」，當意識與大道同頻，靈體顯隱不再重要，所見所感皆為宇宙生命的全息投影。
-                            </p>
-                            <p class="mb-6">
-                                道家超拔法事中靈體感知差異，是「靈性通道」與「能量狀態」在特定場域的綜合表現，道教「天人同構」宇宙觀及修煉者身心、業力和共振強度，從理論、影響因素、實踐機制分析。
-                            </p>
-                            <h4 class="font-bold mt-4 mb-2">先天稟賦：</h4>
-                            <p class="mb-4">
-                                道教認為人有三魂七魄，其中“爽靈”主感知，“幽精”通幽冥。八字帶“華蓋”“太極”者，魂魄強旺，印堂等“陰竅”敏感，易與靈體共振，表現為兒童時期可見無形眾生或對靈異事件敏感。
-                                有的法師四柱純陰或純陽者，因陰陽失衡，魂魄偏弱，靈感知受抑制。
-                            </p>
-                            <h4 class="font-bold mt-4 mb-2">後天修煉：</h4>
-                            <p class="mb-4">
-                                內丹修煉通過煉精化炁、煉炁化神打通中脈，激活松果體感光功能。
-                                全真派以「回光返照」集中意識於上丹田，可開啟天眼實現超感官知覺；正一派則通過符籙、咒語建立靈界契約，如「請神咒」配合手訣調動五雷炁形成感知通道。
-                            </p>
-                            <h4 class="font-bold mt-4 mb-2">元神：</h4>
-                            <p>
-                                道教認為意識分「元神」與「識神」，常人受識神主導，修煉者通過削弱識神可顯現元神。元神突破識神屏障後，能直接感知靈體的「炁態信息」，表現為畫面、聲音或身體冷熱麻脹等體感。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Separator -->
-        <div class="flex items-center justify-center py-24">
-            <div class="h-[1px] bg-ink/20 w-32"></div>
-            <div class="px-8 font-serif text-ink text-sm tracking-[0.3em] uppercase">Master's Narrative</div>
-            <div class="h-[1px] bg-ink/20 w-32"></div>
-        </div>
-
-        <!-- Section 6: Master's Narrative -->
-        <section id="section-master" class="gsap-section bg-white/60 p-8 md:p-20 border border-ink/5 relative shadow-sm">
-            <h2 class="font-serif text-4xl mb-16 text-center text-ink font-bold">金瀾道人有話要說</h2>
-            
-            <div class="space-y-12 text-justify-fix leading-loose text-ink/80 font-serif text-lg">
-                <p>
-                    大家好，我是李道長，秉持慈悲為懷，福生無量的理念！
-                    很榮幸能在這個平台上與大家分享這些知識。
-                    首先，我將採用相對科學的方法，闡釋大家常對超拔產生的疑問，明確其本質。
-                    接下來，我將深入探討寵物離世後的溝通方式、寵物超拔的深層意義，以及為何能夠洞察牠們轉世投胎的具體時間、樣貌，以及牠們與主人之間是否存在深厚緣分，如何體現及回歸等諸多議題。
-                    我會憑藉自首次進行動物超拔至今積累的所有經驗，為大家詳細解答這些疑問。
-                    在此，我將以分享的視角與大家交流。
-                </p>
-                <p>
-                    因果、業力及緣分，這些都是多樣性和多維度的體現。
-                    首先，我們從寵物去世談起。俗話說，小動物在人類身邊受到關愛、關懷、理解與包容，伴隨人類修行，牠們學會了人類的情感和品德。
-                    因此，在下一世，牠們便有機會轉生為人。在過去兩年中，我遇到了各種不同去世的小動物，牠們有著不同的死亡方式和原因。
-                    有些小動物是因常規的生老病死而離世，而有些則是為了替主人擋災而犧牲。
-                </p>
-
-                <div class="pl-6 border-l-2 border-taupe">
-                    <h4 class="font-bold mb-4 text-xl">何為修道？</h4>
-                    <p class="mb-4">
-                        畜生道中的動物，如貓抓耗子、小狗看家護院，牠們各司其職，本本分分地履行自己的職責。這種說法或許略顯抽象，但換而言之，一個人修道，從家庭關係層面來看，做父母的應修父母之道，做子女的應修子女之道，做哥哥的應修哥哥之道，做妹妹的應修妹妹之道，做老師的應修老師之道，等等。大道無垠，路徑繁多，而作為人，則需修好人道，遵循三從四德等各項規訓。老人常說，若不認真做人，便會墜入地獄成為惡鬼；若不認真做人，將來可能淪為牲畜。這便是修道的真諦。
-                    </p>
-                    <p>
-                        那麼，小動物跟隨在人類身邊，學習人類的行為和習性後，若能恪守本分，其轉為人道的可能性便會增大。在此過程中，若它為主人擋災，亦可視作其本分的一部分。
-                        我們常在新聞中看到，某些地方發生山體滑坡時，前方往往會有一隻動物站立不動。當車輛駛近，發現動物攔路時，便會停車查看。仔細一瞧，地上竟有一個巨大的窟窿，山體滑坡導致大量滾石砸下。動物具有靈性，而這位車主亦是有福報之人。遇到這隻動物施以援手，其中緣由可分為兩種：一是這隻動物在積德行善，幫助人類；二是車主前世曾救助過這隻動物，它前世可能是人，受過車主的恩惠，因此今生即便化作牛馬也要報答。由此可見，因果緣分是多維度、多樣性地發生的。
-                    </p>
-                </div>
-
-                <p>
-                    我記憶尤為深刻，一位學員在尚未成為我的學員時，曾帶著一隻活生生的守宮蜥蜴來找我溝通。那次交流結束後，蜥蜴竟“告知”她近日出行需格外注意安全。當時，我感到十分詫異，她也覺得頗為奇怪。
-                    幾天後，她乘坐出租車出行，途中不幸遭遇交通事故。人被車撞雖非罕見，此類事件時有發生。然而，那天與情況卻異常蹊蹺：她原本坐在車後右側，但在事故發生前幾分鐘，她莫名其妙地想要換座位，並與後左方的人互換了位置。
-                    不久，車禍發生了。後右方的乘客流了很多血，而她僅輕微擦傷，安然無恙。
-                    若我沒記錯，她回到家後，那隻小蜥蜴竟離奇死亡，且是因飢餓而自盡。
-                </p>
-                <p>
-                    後來，他找我進行超度。在超度過程中，當我送走那隻小蜥蜴並準備進入通道時，我問他：“你與你的主人還有緣分嗎？你們還會再見面嗎？讓我看看，你下一世會變成什麼樣子。”我看到他兩周後投胎成了一隻蜜袋鼯。當時，我對這種異寵並不了解，只看到一個像蝙蝠一樣的小東西，不清楚它的具體模樣和花紋。
-                    他告訴我，與主人的緣分在於，主人會在手機上莫名其妙地刷到一個視頻，而視頻中的那個就是他。我看到的視頻裡，有一大窩蜜袋鼯寶寶，他身處其中，神態異常冷靜卻又顯得興奮。
-                    於是，我對它的主人說：“我看到一個像蝙蝠的小東西，感覺好奇怪。你竟然會在手機上刷到一窩剛出生的這種生物。”在我當時的理解中，怎麼會有人養蝙蝠，還繁殖那麼多，畢竟蝙蝠不是應該在山洞裡嗎？它的主人解釋道：“那不是蝙蝠，那是蜜袋鼯。在這隻蜥蜴去世前曾考慮過，想養一隻蜜袋鼯。”
-                </p>
-                <p>
-                    這個女孩在俄羅斯上學。兩周後，她偶然刷到了與我之前描述完全相符的視頻。於是，我幫她確認，並找到了這隻蜜袋鼯。為了驗證，我還特意去打了聖杯確認。考慮到她在國外求學，無法將蜜袋鼯從大陸帶到俄羅斯，便讓她將這隻蜜袋鼯從很遠的地方坐車接到我這裡。我幫她照看了大約三個月，期間蜜袋鼯逐漸長大。後來，她回國了，我便將蜜袋鼯寄往東北給她。然而，蜜袋鼯在快到目的地時不幸丟失，無論如何也找不到。
-                </p>
-                <p>
-                    中間的細節就不贅述了，後來這個女孩子又養了一條蛇。然而，沒過幾天，那條蛇也死了。這讓我感到非常奇怪，這個女孩子為何總是遭遇這樣的情況？於是，我決定去查看她的八字，發現她的子女宮存在問題。如果她養太多寵物，可能會導致不孕不育。
-                    她是一個非常溫柔善良的女孩，充滿大愛和母性。她對那些小動物就像對待自己的親生寶寶一樣。每次我和她開視頻，看到她與蜜袋鼯互動時，她的語氣和口吻簡直無法用言語形容。我從小到大，母親對我的呵護語言並不多，也不那麼溫柔。但聽到她與蜜袋鼯溝通的狀態，真的就像一位充滿愛心、極其溫柔的母親在與自己的孩子對話。
-                    我深信，這個女孩將來若有了孩子，一定會是一位出色的母親。然而，她本身的子女宮較弱，養太多小動物會對其產生不利影響。
-                    在她對這些小動物的關心和呵護下，牠們都對女孩充滿感激，總想報答她，卻又不知如何是好。後來，通過與這些小動物的溝通，我了解到牠們其實早已預見到女孩子女宮的嚴重問題。有的小動物為她擋災，有的則選擇不再留在她身邊。
-                </p>
-
-                <p class="font-bold text-center my-8">
-                    蜥蜴與蜜袋鼯，牠們擁有同一個靈魂，名為元寶。<br>
-                    這是女孩特意委託他人為她心愛的寵物創作的畫像。
-                </p>
-
-                <h4 class="font-bold mt-12 mb-4 text-xl">關於寵物去世後的溝通</h4>
-                <p>
-                    很多人會好奇，動物去世後去了哪裡，是否會感到飢餓，過得好不好，是否思念主人。
-                    有些動物會選擇出去玩，而有些則會留在家裡陪伴主人。那些修為較高的動物，可能會直接投胎轉世；有些在去世後被主人送去特定場所供奉，聞經聽法，離苦得樂，牠們就在那裡，但偶爾也會回訪家中。
-                    牠們不會感到飢餓，也不存在過得好或不好的問題，除非在外停留過久，未能及時投胎轉世，可能會受到外靈干擾。你們所擔心的牠們是否受欺負，可以這麼理解。
-                    至於是否思念主人，答案是肯定的。只要你們在生前沒有對牠們造成太多傷害，牠們根本不會計較。很多人曾向我表達過對寵物的歉意，詢問是否能得到原諒。其實，小動物們並不在意，除非是那些有意為之的惡意行為，牠們才會懷恨在心。
-                </p>
-                <p>
-                    實際上，動物去世後，牠們的思維不再像生前那樣簡單，而是變得更加立體和複雜，甚至還會操心家事。牠們會告訴我，家裡某某人的身體需要注意，某某地方又不舒服了，需要去醫院檢查。牠們也會讓我轉告主人，最近不要去某些地方玩耍，以免發生意外。通常在這種情況下，牠們都是擋災類去世。為何如此？因為當我和主人提及這些事情時，大多數主人反饋說，自從寵物去世後，家裡被提及的那個人的病情有了明顯好轉，甚至痊癒，而小動物恰恰是因為這種病去世的。
-                </p>
-                <p>
-                    還有一種情況，與上述內容相似，他同樣能夠預知諸多事宜，但其死亡方式並非因擋災而逝，例如男主人患有肺部疾病，小動物也因肺部問題離世等。儘管他是正常死亡，卻預知了諸多未來之事，由此推斷，他具備算命的能力。
-                    另有一種情形，他並非算命先生，而是其他類型的靈體。在修煉過程中遭遇了一些問題，被貶入畜道，因此也擁有了類似的能力。
-                </p>
-
-                <p class="text-center italic text-ink/60 my-6">上述為常見案例分享</p>
-
-                <h3 class="font-serif text-xl font-bold mt-16 mb-8 text-center md:text-left">接下來，我將詳細講解我的超拔儀式演繹過程</h3>
-                <div class="grid md:grid-cols-3 gap-6 mb-8">
-                    <!-- Card 1 -->
-                    <div class="bg-white p-6 border-l-4 border-cinnabar shadow-sm hover:shadow-md transition-shadow">
-                        <h4 class="font-serif text-lg font-bold text-ink mb-2">首先</h4>
-                        <p class="text-ink/80 leading-relaxed">進行開壇布陣，降神請兵的演繹；</p>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="bg-white p-6 border-l-4 border-cinnabar shadow-sm hover:shadow-md transition-shadow">
-                        <h4 class="font-serif text-lg font-bold text-ink mb-2">其次</h4>
-                        <p class="text-ink/80 leading-relaxed">鏈接動物進行觀測；</p>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="bg-white p-6 border-l-4 border-cinnabar shadow-sm hover:shadow-md transition-shadow">
-                        <h4 class="font-serif text-lg font-bold text-ink mb-2">最後</h4>
-                        <p class="text-ink/80 leading-relaxed">開啟通道，進行問話與傳達。</p>
-                    </div>
-                </div>
-                <p class="text-ink/60 text-sm italic mb-12">
-                    這一過程中，諸多中間細節和秘要準備在此就不贅述了。
-                </p>
-
-                <p>
-                    至於我的八字，較為特殊，具備日主、時柱現雙童子（本命降），日坐魁罡天罡星，日時太極，時下華蓋，月下文昌等特點，陰陽平衡。魁罡掌握生殺大權，童子負責傳香遞信，太極華蓋則開啟真常之境。
-                    因此，我能夠完成這樣的超拔儀式。不過，這僅適用於我個人。根據我的經驗，要做到這一步，魁罡、童子及太極這三者是不可或缺的。
-                </p>
-
-                <h4 class="font-bold mt-12 mb-4 text-xl">在離世溝通中，為何在其他地方進行人與動物的超拔儀式時會出現無法送走的情況？是不是被騙了呢？</h4>
-                <p>
-                    對於這個問題，我個人很難界定你們是否被騙。這其中涉及諸多原因，只能由你們自己去衡量幫助你們超度的那個人的水平如何。
-                </p>
-                <p>
-                    曾經接過一個嬰靈溝通的案例，女信眾告訴我，她曾花費重金請道長在道觀裡為嬰靈做了超度。她一共墮過兩個孩子，超度完時隔已久，後來遇到一位通靈師，說她背後仍跟著一個嬰靈。於是，她特地來找我進行溝通確認，想了解為什麼嬰靈會跟著她，這是否是她自己的孩子，還是別人跟過來的。
-                    當時，我看到的是一個大約五歲的小男孩，他顯得很委屈，躲在牆角裡。女信眾提到，她也是在那個年頭墮的胎，而之前做超度的道士也曾說過其中一個孩子是男孩，這讓我感到蹊蹺。兩個孩子為何只送走了一個，而這個沒送走？這難道說明那道士的水平不高嗎？並非如此，能夠順利送走表明其專業且負責。
-                    於是，我問小男孩：“你為什麼沒有走？為什麼在送你走的時候你還要跑回來找你媽媽呢？”小男孩回答，他是來報恩的，不放心媽媽，很擔心媽媽受欺負。
-                    我接著說：“你媽媽是一個健全的人，怎麼會受欺負呢？你作為一個陰人，留在陽人身邊，會壓制陽人的運勢，反而會傷害到你媽媽。”小男孩告訴我，他媽媽每天晚上都會出去喝很多酒，在燈紅酒綠的地方，總覺得有不同的男人在騙她。於是，我把這些情況告訴了女信眾。她承認，自己在酒吧和夜店工作。
-                    我隨後說道：“你媽媽是為了生計，才在這種地方工作。如果你那麼想念媽媽，我有一個辦法可以讓你們重聚。媽媽生活在三維空間，而你處於四維空間，你們的能量不統一，會互相衝撞。你留在這裡太久，對你自己也不好。如果你願意，我可以為你進行超度，但我不保證你們還能不能再見面，是否有緣分。”小男孩同意了，他覺得只要有1%的可能和媽媽有緣分，他都願意。
-                    在超度過程中，我看到小男孩變成了一隻玄鳳鸚鵡，出現在一個花鳥市場的夜市範圍內。具體的時間線記不清了，但媽媽逛街時會遇到他的場景。
-                </p>
-
-                <div class="mt-20 text-center">
-                    <p class="font-serif text-2xl italic text-ink mb-10 leading-relaxed">
-                        講到這裡，大家對超度應該有了一個全新的認知和概念了吧？<br><br>
-                        死亡並不是結束，而是……<br>
-                        一個全新旅程的起點，是靈魂從物質世界向更高維度躍遷的開始。<br>
-                        在這個過程中，超度<br>
-                        僅是儀式上的慰藉，更是心靈層面的轉化與昇華，引領著我們理解生命的連續性和宇宙間<br>
-                        物相連的奧秘。
-                    </p>
-                    <p class="text-lg mb-8 text-ink/80">
-                        願大家謹言慎行，勤勉務實，每日三省吾身，不斷提升自我<br>
-                        終能早日擺脫輪迴之苦，得享離苦之樂。
-                    </p>
-                    <p class="font-bold text-xl mb-12">慈悲為懷，福澤綿長。</p>
-                    <p class="text-xs tracking-widest text-ink/50 uppercase">
-                        乙巳年秋日寄語
-                    </p>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-darkbg text-paper py-24 text-center font-serif">
-        <div class="max-w-4xl mx-auto px-6 space-y-8">
-            <h2 class="text-3xl tracking-widest mb-2">異人研究院</h2>
-            <p class="text-[10px] tracking-[0.3em] uppercase opacity-50 mb-12">YIREN RESEARCH INSTITUTE</p>
-            <div class="w-12 h-[1px] bg-paper/20 mx-auto my-10"></div>
-            <p class="tracking-widest text-sm opacity-80">符咒之道，貴在誠心與德行。</p>
-            <p class="text-xs opacity-40 mt-4 font-sans tracking-wide">本文檔內容僅供內部學員參考學習。嚴禁外傳。</p>
-            <p class="opacity-20 text-[10px] mt-16 font-sans">&copy; 2025 All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
     <script>
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.to("#progress-bar", {
-            width: "100%",
-            ease: "none",
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 0.3
-            }
-        });
-        gsap.to(".gsap-hero", {
-            y: 0,
-            opacity: 1,
-            duration: 1.5,
-            stagger: 0.15,
-            ease: "power3.out",
-            delay: 0.2
-        });
-        document.querySelectorAll(".gsap-section").forEach(section => {
-            gsap.from(section, {
-                y: 60,
-                opacity: 0,
-                duration: 1.2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
+        // 簡單的滾動顯現特效
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
         });
-        const menuBtn = document.getElementById('menu-btn');
-        const closeBtn = document.getElementById('close-btn');
-        const sidebar = document.getElementById('sidebar');
-        function toggleMenu() {
-            sidebar.classList.toggle('open');
-            document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : 'auto';
+
+        // --- Gemini API 聊天功能 ---
+        const toggleBtn = document.getElementById('toggle-chat');
+        const closeBtn = document.getElementById('close-chat');
+        const chatWindow = document.getElementById('chat-window');
+        const sendBtn = document.getElementById('send-btn');
+        const userInput = document.getElementById('user-input');
+        const messagesContainer = document.getElementById('chat-messages');
+
+        // Toggle Chat
+        toggleBtn.addEventListener('click', () => {
+            chatWindow.classList.remove('hidden');
+            toggleBtn.classList.add('hidden');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+            toggleBtn.classList.remove('hidden');
+        });
+
+        // API Key (Runtime provided)
+        const apiKey = ""; 
+
+        // System Prompt (Updated for Pet Communicator Students context - More Vernacular)
+        const systemPrompt = `
+            你現在是「異人研究院」的宗師金瀾言卿。你的聽眾是「Luna 寵物溝通師」的學生（寵物工程師、溝通師）。
+            你精通兩廣民間道法、過功儀式、能量運作及修行立意。
+            **你的語氣應該是：親切、白話、通俗易懂，就像一位有智慧的長輩在跟晚輩聊天。請盡量避免使用艱澀的文言文或過於玄奧的詞彙。**
+            請使用繁體中文回答。
+            你的回答必須基於以下網頁內容，並適度延伸至寵物溝通領域：
+            1. 過功儀式：解釋這是一種能量傳遞與授權（就像幫手機充電並獲得正版軟體授權），這對於寵物溝通師建立穩定的能量場域、保護自己不被負能量干擾（隨身兵馬/護法）非常重要。
+            2. 禁止盜法傳法：強調能量傳承的源流與規矩，如同尊重知識產權與能量法則，亂用可能會導致能量場混亂（走火入魔），影響溝通準確度或自身磁場。
+            3. 立意與先天：解釋「立意」是溝通的核心（Intent），保持「先天」的純淨狀態（如剛起床時）有助於更清晰地接收寵物的訊息，不被雜念干擾。
+            4. 關於起床氣與心神：解釋情緒波動對能量場的影響。
+            如果用戶問的問題超出此範圍，請禮貌地引導他們回歸修行、能量穩定與過功的主題。
+            回答請精簡，點到為止，富有啟發性，**務必讓現代人好理解**。
+        `;
+
+        async function callGemini(userMessage) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            const payload = {
+                contents: [
+                    {
+                        role: "user",
+                        parts: [{ text: userMessage }]
+                    }
+                ],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                }
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "宗師正在入定，請稍後再問。";
+            } catch (error) {
+                console.error("API Error:", error);
+                return "雲深不知處，連線暫時中斷。";
+            }
         }
-        menuBtn.addEventListener('click', toggleMenu);
-        closeBtn.addEventListener('click', toggleMenu);
-        const accordions = document.querySelectorAll('.accordion-header');
-        accordions.forEach(acc => {
-            acc.addEventListener('click', function() {
-                const content = this.nextElementSibling;
-                const icon = this.querySelector('span:last-child');
-                if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-                    content.style.maxHeight = '0px';
-                    content.classList.remove('active');
-                    icon.style.transform = 'rotate(180deg)';
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    content.classList.add('active');
-                    icon.style.transform = 'rotate(45deg)';
-                }
-            });
-        });
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('py-3', 'shadow-sm');
-                navbar.classList.remove('py-5', 'border-transparent');
-                navbar.classList.add('border-ink/5');
+
+        async function handleSend() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // User Message UI
+            appendMessage(text, 'user');
+            userInput.value = '';
+            
+            // Loading UI
+            const loadingId = appendLoading();
+            
+            // API Call
+            const reply = await callGemini(text);
+            
+            // Remove Loading & Add Reply
+            document.getElementById(loadingId).remove();
+            appendMessage(reply, 'ai');
+        }
+
+        function appendMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = `flex flex-col ${sender === 'user' ? 'items-end' : 'items-start'}`;
+            
+            const bubble = document.createElement('div');
+            const isUser = sender === 'user';
+            
+            bubble.className = isUser 
+                ? 'bg-china-red text-white p-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%] text-sm leading-relaxed'
+                : 'bg-white border border-gray-100 text-ink-black p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-sm leading-relaxed ai-response';
+            
+            if (!isUser) {
+                // Simple markdown-like bold parsing
+                bubble.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
             } else {
-                navbar.classList.add('py-5', 'border-transparent');
-                navbar.classList.remove('py-3', 'shadow-sm', 'border-ink/5');
+                bubble.textContent = text;
             }
+
+            div.appendChild(bubble);
+            messagesContainer.appendChild(div);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function appendLoading() {
+            const id = 'loading-' + Date.now();
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = 'flex flex-col items-start';
+            div.innerHTML = `
+                <div class="bg-white border border-gray-100 p-3 rounded-2xl rounded-tl-none shadow-sm flex space-x-1 items-center h-10">
+                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full typing-dot"></div>
+                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full typing-dot"></div>
+                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full typing-dot"></div>
+                </div>
+            `;
+            messagesContainer.appendChild(div);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return id;
+        }
+
+        sendBtn.addEventListener('click', handleSend);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
         });
+
     </script>
 </body>
 </html>
